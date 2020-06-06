@@ -91,18 +91,13 @@ const dbService = new DBService();
 
 const renderCard = (response, target) => {
     tvShowsList.textContent = '';
-    document.body.style.cssText = '';
 
     if (!response.total_results) {
         loading.remove();
         tvShowsHead.textContent = '';
-    //tvShowsHead.textContent = 'К сожалению по вашему запросу ничего не найдено...!';
-    //tvShowsHead.style.color = 'red';
-        document.body.style.cssText = `
-        background-image: url(../img/sos-img.jpg);
-        background-repeat: no-repeat;
-        background-position: center bottom;
-        `;
+        tvShowsHead.textContent = 'К сожалению по вашему запросу ничего не найдено...!';
+        tvShowsHead.style.color = 'red';
+     
         return;
     }
 
@@ -157,7 +152,6 @@ searchForm.addEventListener('submit', event => {
     const value = searchFormInput.value.trim();
     searchFormInput.value = '';
     pagination.textContent = '';
-    document.body.style.cssText = '';
     
     if (value) {
         tvShows.append(loading);
@@ -222,7 +216,6 @@ leftMenu.addEventListener('click', event => {
         tvShowsList.textContent = '';
         tvShowsHead.textContent = '';
         pagination.textContent = '';
-        document.body.style.cssText = '';
     }
 
 });
@@ -236,11 +229,6 @@ tvShowsList.addEventListener('click', event => {
     
     if (card) {
         preloader.style.display = 'block';
-        modal.style.cssText = `
-        background-image: url(../img/modal-img.jpg);
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        `;
         dbService.getTvShow(card.id)
             .then(response => {
 
@@ -272,8 +260,9 @@ tvShowsList.addEventListener('click', event => {
                 if (response.results.length) {
                     headTrailer.classList.remove('hide');
                     response.results.forEach(item => {
-                        const trailerItem = document.createElement('li');
-    
+                        const trailerItem = document.createElement('div');
+                        const trailerCard = document.createElement('div');
+                        trailerItem.classList.add('trailer-video');
                         trailerItem.innerHTML = `
                             <iframe width="480" 
                                 height="315" 
@@ -281,15 +270,15 @@ tvShowsList.addEventListener('click', event => {
                                 frameborder="0" 
                                 allowfullscreen>
                             </iframe>
-                            <h4 class="trailer-card__head">${item.name}</h4>
+                        `;
+                        trailerCard.innerHTML = `
+                        <h4 class="trailer-card__head">${item.name}</h4>
                         `;
 
-                        trailerItem.style.cssText = `
-                            margin-top: 15px;
-                            margin-bottom: 20px;
-                        `;
+                        trailerItem.style.marginTop = '15px';
                        
                         trailer.append(trailerItem);
+                        trailer.append(trailerCard);
                     }) 
                 }
               
@@ -311,7 +300,6 @@ modal.addEventListener('click', event => {
     event.target.classList.contains('modal')) {
         document.body.style.overflow = 'auto';
         modal.classList.add('hide');
-        modal.style.cssText = '';
         trailer.textContent = '';
     }
 });
