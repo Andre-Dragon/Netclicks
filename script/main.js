@@ -95,7 +95,7 @@ const renderCard = (response, target) => {
     if (!response.total_results) {
         loading.remove();
         tvShowsHead.textContent = '';
-        tvShowsHead.textContent = 'К сожалению по вашему запросу ничего не найдено...!';
+        tvShowsHead.textContent = 'К сожалению по вашему запросу ничего не найдено ...!';
         tvShowsHead.style.color = 'red';
      
         return;

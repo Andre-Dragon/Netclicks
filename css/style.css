@@ -50,6 +50,8 @@ body {
     background-image: url(../img/modal-img.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
     font-family: Museo Sans, Arial, sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -558,6 +560,8 @@ main {
     background-image: url(../img/modal-img.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
 .modal__content {
@@ -739,12 +743,16 @@ main {
 		overflow-y: auto;
 		max-height: 400px;
 		padding: 30px;
-		border-width: 16px;
+        border-width: 16px;
+        -ms-overflow-style: none;  /* IE 10+ */
+        scrollbar-width: none; /* Firefox */
 	}
 
 	.modal__description {
 		overflow-y: visible;
-		max-height: none;
+        max-height: none;
+        -ms-overflow-style: none;  /* IE 10+ */
+        scrollbar-width: none; /* Firefox */
 	}
 
 	.modal__content h2 {
@@ -763,7 +771,7 @@ main {
     }
 
 	.modal__content {
-		min-width: 320px;
+		min-width: 520px;
 		width: 100%;
 	}
 
@@ -779,7 +787,6 @@ main {
         margin: 15px auto;
     }
 
-
     .left-menu {
         height: 50px;
     }
@@ -791,6 +798,11 @@ main {
     .left-menu.openMenu {
         height: 100%;
     }
+
+    .modal__content {
+		min-width: 360px;
+	}
+
 }
 
 @media (max-width: 400px) {
@@ -802,6 +814,10 @@ main {
     .title {
         font-size: 42px;
     }
+
+    .modal__content {
+		min-width: 320px;
+	}
 
 }
 
@@ -1247,8 +1263,4 @@ div:after {
     height: 100%;
     border-width: 0;
     outline-width: 0;
-}
-
-.trailer-card__head  {
-
 }
